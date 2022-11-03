@@ -1,0 +1,7 @@
+redis
+#selenium-wire
+yt_dlp
+internetarchive
+fastapi[all]
+asyncpg
+irc

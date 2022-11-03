@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3-pip && pip3 install irc requests
+
+COPY . /app
+
+WORKDIR /app
+
+CMD ["/usr/bin/python3", "tikoff_bot.py"]

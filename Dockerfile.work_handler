@@ -1,0 +1,21 @@
+FROM ubuntu:22.04
+
+ENV REDIS_HOST="redis"
+ENV REDIS_PASSWORD=""
+
+ENV PG_HOST="127.0.0.1"
+ENV PG_USER="postgres"
+ENV PG_PASS=""
+ENV PG_DB_NAME="postgres"
+
+EXPOSE 8000
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3-pip libffi-dev python3-cryptography build-essential python3-dev \
+    && pip3 install yt_dlp redis internetarchive redis-bloom-filter 'fastapi[all]' asyncpg zstd sqlalchemy 
+
+COPY . /app
+
+WORKDIR /app
+
+CMD ["/usr/bin/python3", "-m", "uvicorn", "--host", "0.0.0.0", "work_handler:app"]
